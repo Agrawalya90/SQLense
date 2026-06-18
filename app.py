@@ -8,7 +8,6 @@ from tools import tools, handle_tool_calls
 
 load_dotenv(dotenv_path=".env", override=True)
 
-# -- Groq client --------------------------------------------------------------
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 groq = OpenAI(
@@ -17,7 +16,6 @@ groq = OpenAI(
 )
 MODEL = "openai/gpt-oss-120b"
 
-# -- DB init + schema injection -----------------------------------------------
 
 init_db()
 SCHEMA = get_schema()
@@ -48,10 +46,8 @@ EXAMPLE_QUESTIONS = [
 ]
 
 
-# -- Chat function -------------------------------------------------------------
 
 def chat(user_message, history):
-    # Gradio 6 passes history as list of {"role": ..., "content": ...} dicts
     messages = [{"role": "system", "content": SYSTEM_PROMPT}]
     for h in history:
         messages.append({"role": h["role"], "content": h["content"]})
@@ -93,7 +89,6 @@ def chat(user_message, history):
     return response.choices[0].message.content
 
 
-# -- Gradio UI ----------------------------------------------------------------
 
 with gr.Blocks(title="Amazon Product Analyst") as demo:
     gr.Markdown("""
@@ -114,5 +109,4 @@ with gr.Blocks(title="Amazon Product Analyst") as demo:
     Read-only — only SELECT queries are allowed.
     """)
 
-# ✅ theme moved to launch() in Gradio 6.0
 demo.launch(theme=gr.themes.Soft())
