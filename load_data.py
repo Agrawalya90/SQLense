@@ -1,8 +1,3 @@
-"""
-Loads your downloaded CSV into the SQLite database.
-Run this once before starting the app:
-    python load_data.py
-"""
 
 import csv
 import sqlite3
@@ -96,7 +91,6 @@ def load():
                 if cursor.rowcount:
                     products_inserted += 1
 
-                # ── Insert review ─────────────────────────────────────────────
                 review_id = row.get("review_id", "").strip()
                 if review_id:
                     cursor.execute("""
