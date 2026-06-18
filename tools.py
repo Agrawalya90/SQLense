@@ -1,7 +1,6 @@
 import ast
 from database import execute_sql
 
-# ── Tool schema sent to the LLM ───────────────────────────────────────────────
 
 tools = [
     {
@@ -28,7 +27,6 @@ tools = [
 ]
 
 
-# ── Tool call handler ─────────────────────────────────────────────────────────
 
 def handle_tool_calls(message):
     """
